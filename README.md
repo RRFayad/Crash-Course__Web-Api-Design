@@ -162,3 +162,46 @@
         - Bi-directional communicatoin (e.g. chat)
     - HTTP Streaming
         - One way unlimited communication (e.g. Twitter)
+
+3. ## API Security
+
+- Authentication and Authorization
+
+  - Authentication is about verifying who you are
+  - Authorization is about what you are allowed to do
+
+- Basic Authentication
+  -B64 encoded username & password
+
+  - Bad for when there will be 3rd party applications involved, they would have to retrive the user login data
+  - Also, those applications would have full access to users data
+    - Imagine a 3rd party tool that posts tweets in user's behalf
+      - It could have data leaked, so tweeter user's password would be leaked
+      - The app would have full access
+
+- So OAuth solve these problems
+
+  - It Allows users to grant access to applications without having to share access with them
+
+- Flow:
+
+  - So the User input info in a Front Channel;
+  - It redirects to an URI (a Callback URL), to the Authorization Server
+  - So, it prompts the user to consent access to specific features
+  - Return authorization code to the front channel
+  - Now the service's back channel uses the code with the Authorization server to get an access token
+    -So, this token will be used to authorize predetermined actions
+
+- But, it became 'wrongly used', as apps started using OAuth, just to get people data
+
+- And there's OpenID Connect comes in
+
+  - It's a protocol just for the Authentication
+
+- Scopes
+
+  - OAuth scopes is used to limit the shared data
+  - So, we have to define some access scopes when developing the API
+
+- Refresh Tokens
+  - Limiting the validity of the token
