@@ -2,7 +2,7 @@
 
 [Playlist](https://www.youtube.com/watch?v=hkXzsB8D_mo&list=PLP_rkG1reBjrCKy2Pb1bvjJKbKfantijk)
 
-## Request - Response API's: REST vs RPC vs GraphQL API - How do I pick the right API paradigm?
+1. ## Request / Response API's: REST vs RPC vs GraphQL API - How do I pick the right API paradigm?
 
 - Essencially, API's can be categorized into request / response APIs or Event Driven APIs
 
@@ -83,3 +83,82 @@
 #### Conclusion:
 
     - It makes sense only when the quering flexibility is needed
+
+2. ## Event Driven APIs: Webhooks vs Websockets
+
+- Req / Res APIs:
+
+  - When we want to know a state of something on the server side or in the DB, we would have to keep sending reqs until the update is done
+  - Which is inneficient
+
+- So, that's one of the problems that an event driven API solves
+
+- The three types of Event Driven APIs are:
+  - WebHooks
+  - WebSockets
+  - HTTP Streaming
+
+### WebHooks
+
+- Characteristics
+
+  - e.g.: Sendgrid - For emails
+  - WebHooks are setup in the client and in the WebHook API provider
+  - The client defines the events it's interested in and the URL the provider sends updates to
+  - So the APi provider send, usualy a post request, to the URL with the information
+
+- Drawbacks
+
+  - Be responsible for failures
+
+    - So the API provider must hae policies to be sure the data is sent (and received b the client)
+
+  - Firewalls
+
+    - Security concerns may be tricky sometimes
+
+    - Noise
+      - Sometimes many event may be not wat we want
+
+### WebSockets
+
+    - Concept:
+        - The client sends a 1st HTTP request, know as the *Handshake*
+        - So, the WebSocket Stabilish connection
+        - Now, there's a bidirectional communication
+        - It may be used in Chats applications for example
+
+    - Pros
+        - biderectional low latency communication
+        - Reduced overhead of HTTP requests
+
+    - Cons
+        - Clients are responsible for connection
+        - Scalability Challenges
+
+### HTTP Streaming
+
+    -Concept:
+        - Instead of a limited response (as regular APIs), it will continue to pussh data
+        - It can be:
+            - Chunked data (common for 2 backends)
+            - Server-Sent-Events (common for browser apps)
+        - e.g.: Twitter
+            - They use HTTP Streaming to push new tweets over a single http connection, saving resources for the consumer and for twitter
+
+    - Pros
+        - Can stream over a simple HTTP
+        - Native browser support
+
+    - Cons
+        - Bidirectional communication in challenging
+        - Buffering (sometimes browser and proxies have buffering limit)
+
+### Conclusion:
+
+    - Webhooks
+        - Event from the server
+    - WebSockets
+        - Bi-directional communicatoin (e.g. chat)
+    - HTTP Streaming
+        - One way unlimited communication (e.g. Twitter)
