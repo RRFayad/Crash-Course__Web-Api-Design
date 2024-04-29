@@ -205,3 +205,28 @@
 
 - Refresh Tokens
   - Limiting the validity of the token
+
+4. ## OAuth 2.0 using Auth0 | React and Node
+
+- We are gonna build the challenges APi with only 1 endpoint and specific permissions
+
+- ![Project Schema](image.png)
+
+### Steps:
+
+1. Set the API up
+   1.1. Create the API in the auth0.com
+   1.2. Define Settings:
+
+   - Token expiration
+   - Enable RBAC
+   - Add Permissions in Access Token
+
+     1.3. Permissions (scope)
+
+2. Create the server (simple version in our index.js)
+
+3. Configure the client side
+   3.1. Define the domain which will have the permission to interact with the server (in our case, localhost)
+
+- Stopped at 16:12 while configing the React App
