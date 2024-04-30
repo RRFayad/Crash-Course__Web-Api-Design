@@ -229,4 +229,6 @@
 3. Configure the client side
    3.1. Define the domain which will have the permission to interact with the server (in our case, localhost)
 
-- Stopped at 16:12 while configing the React App
+4. Set Up the Front End Project
+   4.1. Created the req logic in the loginButton
+   4.2. Set the logout logic
