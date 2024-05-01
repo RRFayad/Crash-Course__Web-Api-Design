@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const port = process.env.PORT || 3001;
-// const oAuth = require("./middleware/oAuth");
+const oAuth = require("./middleware/oAuth");
 
 const app = express();
 
@@ -11,7 +11,13 @@ app.use(oAuth);
 
 app.get("/challenges", async (req, res, next) => {
   try {
-    const response = await axios({ method: "get", url: challengesAPIEndpoint });
+    const { access_token } = req.oauth;
+
+    const response = await axios({
+      method: "get",
+      url: challengesAPIEndpoint,
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
     res.json(response.data);
   } catch (err) {
     console.log(err);
